@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^2.1",
+        "openboleto/openboleto": "^1.0"
+		
+    }
+}

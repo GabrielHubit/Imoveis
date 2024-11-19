@@ -1,0 +1,22 @@
+<?php
+session_start();
+include 'db.php';
+
+$usuario = $_POST['usuario'];
+$senha = $_POST['senha'];
+
+$query = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ?");
+$query->execute([$usuario]);
+$user = $query->fetch();
+
+if ($user && password_verify($senha, $user['senha'])) {
+    $_SESSION['usuario'] = $user['usuario'];
+    if ($user['usuario'] === 'admin') {
+        header('Location: admin.php');
+    } else {
+        header('Location: usuario.php');
+    }
+} else {
+    echo "Usuário ou senha inválidos.";
+}
+?>
